@@ -1,5 +1,5 @@
 # File: automate_recycle_bin.py
-# Main reason for this script is to automate the process of emptying the recycle bin on a Windows system. This can be useful for maintaining system performance and freeing up disk space.
+# Main reason for this script is to automate scheduling the process of emptying the recycle bin.
 #Revision History: 
 #   v1.0 - Initial version: Added the functionality to empty the recycle bin and handle exceptions. (September 5, 2026)
 # Added the main function to call the empty_recycle_bin function when the script is executed directly. (September 7, 2026)
