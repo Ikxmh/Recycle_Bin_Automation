@@ -15,3 +15,6 @@ def empty_recycle_bin():
         print("Recycle bin emptied successfully.")
     except Exception as e:
         print(f"An error occurred while emptying the recycle bin: {e} or it is already empty.")
+
+if __name__ == "__main__":
+    empty_recycle_bin()
