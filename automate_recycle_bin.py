@@ -6,19 +6,25 @@
 import os
 import winshell
 
-for item in winshell.recycle_bin():
-    original_path = item.original_filename()
-
 # Function to empty the recycle bin
 def empty_recycle_bin():
 
-    if original_path.lower().endswith(('.mp4', '.mkv')):
+    for item in winshell.recycle_bin():
+
         try:
-            # Empty the recycle bin
-            item.ultraandestory()
-            print("Recycle bin emptied successfully.")
+            original_path = item.original_filename()
+            if original_path.lower().endswith(('.mp4', '.mkv')):
+                bin_file_path = item.real_filename()
+
+                if (bin_file_path and os.path.isfile(bin_file_path)):
+                    os.remove(bin_file_path)
+                    print(f"Deleted: {bin_file_path}")
+                else:
+                    print(f"File not found in recycle bin: {bin_file_path}")
+        except FileNotFoundError:
+            print(f"File not found in recycle bin: {item.real_filename()}")
         except Exception as e:
-            print(f"An error occurred while emptying the recycle bin: {e} or it is already empty.")
+            print(f"Error processing item: {e}")
 
 if __name__ == "__main__":
     empty_recycle_bin()
