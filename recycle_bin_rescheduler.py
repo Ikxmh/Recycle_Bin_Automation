@@ -6,16 +6,25 @@
 import os  
 import sys
 import win32com.client
-
+import shutil
 
 def schedule_recycle_bin_emptying():
 
     # script path to automate_recycle_bin.py
-    script_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "automate_recycle_bin.py") 
+    script_dir = os.path.dirname(os.path.abspath(__file__))  
     script_path = os.path.join(script_dir, "automate_recycle_bin.py")  
 
     # Get the path to the Python executable
     pythonw_path = os.path.join(os.path.dirname(sys.executable), "pythonw.exe")
+
+    if not os.path.exists(pythonw_path):
+     
+        system_pythonw_path = shutil.which("pythonw.exe")
+        if system_pythonw_path:
+            pythonw_path = system_pythonw_path
+        else:
+            raise FileNotFoundError("pythonw.exe not found. Please ensure Python is installed and pythonw.exe is available.")
+        
 
     # Create a Task Scheduler object
     scheduler = win32com.client.Dispatch("Schedule.Service")
@@ -24,6 +33,8 @@ def schedule_recycle_bin_emptying():
 
     # Wanna create a task for the task scheduler.
     task_def = scheduler.NewTask(0)
+
+    task_def.Principal.RunLevel = 1  # 1 = Run with highest privileges
 
     # Set the task's properties
     task_def.RegistrationInfo.Description = "Automated Recycle Bin Emptying"
