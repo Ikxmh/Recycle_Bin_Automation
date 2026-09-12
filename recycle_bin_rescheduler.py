@@ -11,8 +11,8 @@ import win32com.client
 def schedule_recycle_bin_emptying():
 
     # script path to automate_recycle_bin.py
-    script_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "automate_recycle_bin.py") # not sure if this is best practice? 
-    script_path = os.path.join(script_dir, "automate_recycle_bin.py")  # Path to the script to be scheduled
+    script_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "automate_recycle_bin.py") 
+    script_path = os.path.join(script_dir, "automate_recycle_bin.py")  
 
     # Get the path to the Python executable
     pythonw_path = os.path.join(os.path.dirname(sys.executable), "pythonw.exe")
